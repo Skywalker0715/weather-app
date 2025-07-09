@@ -29,7 +29,7 @@ export default function RootLayout({
   return (
     <html lang="en">
       <head>
-        <link rel="icon" href="/app/sun.png" type="image/png" /> {/* Menambahkan favicon */}
+        <link rel="icon" href="/app/sun.png" type="image/png" />
       </head>
       <body 
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
