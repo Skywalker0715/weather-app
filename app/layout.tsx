@@ -12,14 +12,21 @@ const geistMono = Geist_Mono({
   subsets: ["latin"],
 });
 
+// ...existing code...
 export const metadata: Metadata = {
   icons: {
-    icon: "/assets/icon.png", // Ganti favicon ke gambar yang diupload
+    icon: "/assets/icon.png",
+    apple: "/assets/icon.png",
+    shortcut: "/assets/icon.png",
+    other: [
+      { rel: "icon", url: "/assets/icon.png" },
+      { rel: "apple-touch-icon", url: "/assets/icon.png" },
+      { rel: "shortcut icon", url: "/assets/icon.png" }
+    ]
   },
   title: "Aplikasi Cek Cuaca",
   description: "Aplikasi cek cuaca sederhana dengan Next.js",
 };
-
 
 export default function RootLayout({
   children,
@@ -28,9 +35,6 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <head>
-        <link rel="icon" href="/assets/icon.jpeg" type="image/jpeg" />
-      </head>
       <body 
         className={`${geistSans.variable} ${geistMono.variable} antialiased`}
       >
@@ -39,3 +43,4 @@ export default function RootLayout({
     </html>
   );
 }
+// ...existing code...
