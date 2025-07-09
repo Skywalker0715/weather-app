@@ -1,29 +1,23 @@
 'use client';
 
 /**
- * Komponen utama halaman Home untuk aplikasi cek cuaca.
+ * Halaman utama aplikasi Cek Cuaca.
+ * 
  * Menggunakan custom hook useWeather untuk mengelola state dan fetching data.
+ * Memisahkan komponen CityInput untuk form input nama kota dan WeatherDisplay untuk menampilkan hasil cuaca.
+ * 
+ * Komponen Button digunakan dari komponen UI yang reusable.
  */
 
 import { useWeather } from "../lib/useWeather";
 import { Button } from "../components/ui/button";
 
-/**
- * Props untuk komponen CityInput.
- * - city: nilai input nama kota
- * - setCity: fungsi untuk mengubah nilai city
- * - onSubmit: fungsi yang dipanggil saat form disubmit
- */
 type CityInputProps = {
   city: string;
   setCity: React.Dispatch<React.SetStateAction<string>>;
   onSubmit: (e: React.FormEvent) => void;
 };
 
-/**
- * Komponen form input nama kota.
- * Menampilkan input text dan tombol submit.
- */
 function CityInput({ city, setCity, onSubmit }: CityInputProps) {
   return (
     <form onSubmit={onSubmit} className="space-y-4">
@@ -60,19 +54,11 @@ function CityInput({ city, setCity, onSubmit }: CityInputProps) {
   );
 }
 
-/**
- * Props untuk komponen WeatherDisplay.
- * - weatherData: data cuaca yang akan ditampilkan
- * - error: pesan error jika ada
- */
 type WeatherDisplayProps = {
   weatherData: any;
   error: string;
 };
 
-/**
- * Komponen untuk menampilkan hasil data cuaca atau pesan error.
- */
 function WeatherDisplay({ weatherData, error }: WeatherDisplayProps) {
   return (
     <div id="weather-result" className="bg-white rounded-lg shadow-lg p-6 mt-4">
@@ -107,14 +93,9 @@ function WeatherDisplay({ weatherData, error }: WeatherDisplayProps) {
   );
 }
 
-/**
- * Komponen utama halaman Home.
- * Menggunakan custom hook useWeather untuk mengelola state dan fetching data.
- */
 export default function Home() {
   const { city, setCity, weatherData, error, fetchData } = useWeather();
 
-  // Fungsi yang dipanggil saat form disubmit
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
     fetchData();
