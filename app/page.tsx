@@ -7,7 +7,7 @@ import WeatherDisplay from "../components/ui/WeatherDisplay";
 
 export default function Home() {
   const [city, setCity] = useState("");
-  const [weatherData, setWeatherData] = useState<WeatherData | null>(null);
+  const [weatherData, setWeatherData] = useState<WeatherData | undefined>(undefined);
   const [error, setError] = useState<string>("");
 
   const handleSubmit = async (e: React.FormEvent) => {
@@ -18,7 +18,7 @@ export default function Home() {
       setWeatherData(data);
     } catch (error: any) {
       setError("Error fetching weather data: " + error.message);
-      setWeatherData(null);
+      setWeatherData(undefined);
     }
   };
 
