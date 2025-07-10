@@ -11,38 +11,27 @@ type CityInputProps = {
 
 export default function CityInput({ city, setCity, onSubmit }: CityInputProps) {
   return (
-    <form onSubmit={onSubmit}   
-    className="space-y-6 rounded-xl p-6 shadow-lg max-w-md mx-auto transition-all duration-500 ease-in-out hover:shadow-2xl backdrop-blur-2xl"
-    style={{ background: "rgba(255,255,255,0.50)" }}>
-      <h1 className="text-3xl font-extrabold text-center text-gray-900 mb-4 drop-shadow-sm">Cek Cuaca</h1>
-      <div className="relative">
-        <label htmlFor="city" className="block text-gray-700 text-sm font-semibold mb-2">
-          Masukkan Nama Kota
-        </label>
-        <div className="flex items-center space-x-3">
-          <input
-            type="text"
-            id="city"
-            name="city"
-            value={city}
-            onChange={(e) => setCity(e.target.value)}
-            className="flex-grow p-3 rounded-lg border border-gray-300 bg-white bg-opacity-10 placeholder-gray-400 focus:outline-none focus:ring-2 focus:ring-blue-400 focus:border-transparent transition duration-300"
-            placeholder="Contoh: Jakarta"
-            required
-          />
-          <Button
-            type="submit"
-            className="p-3 bg-blue-500 text-white rounded-lg hover:bg-blue-600 transition duration-300 shadow-md flex items-center justify-center"
-            icon={
-              <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M10 4a6 6 0 100 12 6 6 0 000-12zM16.24 16.24l4.24 4.24M20 20l-4.24-4.24" />
-              </svg>
-            }
-          >
-            Kirim
-          </Button>
-        </div>
-      </div>
+    <form onSubmit={onSubmit} className="flex items-center space-x-3 bg-white bg-opacity-30 backdrop-blur-lg rounded-full px-4 py-1 max-w-md mx-auto shadow-lg">
+      <input
+        type="text"
+        id="city"
+        name="city"
+        value={city}
+        onChange={(e) => setCity(e.target.value)}
+        placeholder="Masukan Kota"
+        className="flex-grow bg-transparent placeholder-gray-300 text-gray-900 focus:outline-none text-base font-medium"
+        required
+      />
+      <Button
+        type="submit"
+        className="w-10 h-10 rounded-full bg-gradient-to-tr from-orange-400 to-orange-600 shadow-lg flex items-center justify-center hover:brightness-110 transition p-0"
+        aria-label="Search"
+        icon={
+          <svg xmlns="http://www.w3.org/2000/svg" className="w-5 h-5 text-white" fill="none" viewBox="0 0 24 24" stroke="currentColor" strokeWidth={2}>
+            <path strokeLinecap="round" strokeLinejoin="round" d="M21 21l-4.35-4.35m0 0A7.5 7.5 0 1110.5 3a7.5 7.5 0 016.15 13.65z" />
+          </svg>
+        }
+      />
     </form>
   );
 }

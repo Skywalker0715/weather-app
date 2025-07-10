@@ -17,8 +17,22 @@ const weatherIconMap: { [key: string]: string } = {
   "thunderstorm": "/assets/storm.png",
   "snow": "/assets/temperature-cold.png",
   "mist": "/assets/starry-night.png",
-  // Tambahkan mapping lain sesuai kebutuhan
 };
+
+const infoIconMap = {
+  hot: "/assets/hot.png",
+  cold: "/assets/temperature-cold.png",
+  kelembaban: "/assets/humidity.png",
+  angin: "/assets/cloud.png",
+};
+
+function getSuhuIcon(temp: number): string {
+  if (temp >= 25) {
+    return infoIconMap.hot;
+  } else {
+    return infoIconMap.cold;
+  }
+}
 
 function getWeatherIcon(description: string): string {
   return weatherIconMap[description.toLowerCase()] || "/assets/sun.png";
@@ -27,7 +41,7 @@ function getWeatherIcon(description: string): string {
 export default function WeatherDisplay({ weatherData, error }: WeatherDisplayProps) {
   if (error) {
     return (
-      <div className="bg-red-100 text-red-700 rounded-lg p-4 mt-4 max-w-md mx-auto">
+      <div className="max-w-md mx-auto mt-6 p-6 bg-red-100 text-red-700 rounded-xl shadow-md text-center">
         {error}
       </div>
     );
@@ -40,23 +54,26 @@ export default function WeatherDisplay({ weatherData, error }: WeatherDisplayPro
   const iconSrc = getWeatherIcon(weatherData.weather[0].description);
 
   return (
-    <div className="max-w-md mx-auto mt-6 bg-gradient-to-br from-blue-400 to-blue-200 rounded-xl shadow-lg p-6 text-center text-gray-900 bg-opacity-50 backdrop-blur-xl transition-all duration-700 ease-in-out hover:shadow-2xl animate-fade-in">
-      <h2 className="text-lg font-semibold mb-2">{weatherData.name}</h2>
-      <img src={iconSrc} alt={weatherData.weather[0].description} className="mx-auto w-20 h-20 mb-2 animate-fade-in" />
-      <p className="text-4xl font-extrabold">{Math.round(weatherData.main.temp)}°C</p>
-      <p className="capitalize text-base mb-4">{weatherData.weather[0].description}</p>
-      <div className="flex justify-around text-xs text-gray-800">
-        <div>
-          <p>Feels like</p>
-          <p className="font-semibold">{Math.round(weatherData.main.feels_like)}°C</p>
+    <div className="max-w-md mx-auto mt-6 p-6 bg-blue-200 bg-opacity-30 backdrop-blur-2xl rounded-3xl shadow-lg text-center text-gray-900">
+      <h1 className="text-3xl font-bold mb-1 drop-shadow-lg">{weatherData.name}</h1>
+      <img src={iconSrc} alt={weatherData.weather[0].description} className="mx-auto w-24 h-24 mb-4 drop-shadow-lg" />
+      <p className="text-6xl font-extrabold mb-2 drop-shadow-lg">{Math.round(weatherData.main.temp)}°</p>
+      <p className="text-xl mb-6 drop-shadow-lg capitalize">{weatherData.weather[0].description}</p>
+      <div className="flex justify-around space-x-4 text-sm">
+        <div className="bg-gray-100 bg-opacity-30 rounded-xl p-4 flex-1 drop-shadow-lg flex flex-col items-center">
+          <img src={getSuhuIcon(weatherData.main.temp)} alt="Suhu" className="w-8 h-8 mb-2" />
+          <p className="uppercase tracking-wide">Suhu</p>
+          <p className="text-2xl font-semibold">{Math.round(weatherData.main.temp)}°C</p>
         </div>
-        <div>
-          <p>Humidity</p>
-          <p className="font-semibold">{weatherData.main.humidity}%</p>
+        <div className="bg-gray-100 bg-opacity-30 rounded-xl p-4 flex-1 drop-shadow-lg flex flex-col items-center">
+          <img src={infoIconMap.kelembaban} alt="Kelembaban" className="w-8 h-8 mb-2" />
+          <p className="uppercase tracking-wide">Kelembaban</p>
+          <p className="text-2xl font-semibold">{weatherData.main.humidity}%</p>
         </div>
-        <div>
-          <p>Wind</p>
-          <p className="font-semibold">{weatherData.wind.speed} m/s</p>
+        <div className="bg-white bg-opacity-20 backdrop-blur-md rounded-xl p-4 flex-1 drop-shadow-lg flex flex-col items-center">
+          <img src={infoIconMap.angin} alt="Angin" className="w-8 h-8 mb-2" />
+          <p className="uppercase tracking-wide">Angin</p>
+          <p className="text-2xl font-semibold">{weatherData.wind.speed} m/s</p>
         </div>
       </div>
     </div>
